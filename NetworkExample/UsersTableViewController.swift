@@ -133,14 +133,27 @@ class UsersTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "todos" {
+            
+            let controller = segue.destination as! TodosTableViewController
+            controller.apiUrl = apiUrl
+            controller.session = session
+            
+            let selectedCell = tableView.indexPathForSelectedRow
+            let user = users[selectedCell!.row]
+            
+            controller.user = user
+            
+        }
     }
-    */
+    
 
 }
