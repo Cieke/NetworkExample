@@ -56,10 +56,15 @@ class UsersTableViewController: UITableViewController {
                     
                     self.users.append(user)
                     
-                    
                 }
                 
-                print(usersJson)
+                 // standaard in IOS 1 thread - UI thread, deze die wij nu willen zit in de background thread, dit moet nu naar de UI thread
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+               
+               
+               
             
             }catch let error {
                 print(error)
