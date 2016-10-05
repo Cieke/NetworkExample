@@ -25,7 +25,7 @@ class TodosTableViewController: UITableViewController {
     }
     
     private func getTodos(){
-        let todosUrl = apiUrl.appending ("/posts?userId=\(user.id)")
+        let todosUrl = apiUrl.appending ("/todos?userId=\(user.id)")
         let url = URL(string: todosUrl)
         
         let todosTask = session.dataTask(with: url!) { (data, response, error) in
