@@ -10,6 +10,9 @@ import UIKit
 
 class UsersTableViewController: UITableViewController {
     
+    
+    @IBOutlet weak var refresh: UIRefreshControl!
+    
     var users = [User]() // lege array
     private let apiUrl:String = "https://jsonplaceholder.typicode.com"
     private var session:URLSession!
@@ -20,12 +23,11 @@ class UsersTableViewController: UITableViewController {
         let config = URLSessionConfiguration.default
         session = URLSession(configuration: config)
         getUsers()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
+        
+        refresh.addTarget(self, action: #selector(getUsers), for: .valueChanged)
+        getUsers()
+        
+          }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -34,7 +36,10 @@ class UsersTableViewController: UITableViewController {
     
     
     
-    private func getUsers(){
+     func getUsers(){
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         let usersUrl = "\(apiUrl)/users"
         let url = URL(string: usersUrl)
         
@@ -60,7 +65,10 @@ class UsersTableViewController: UITableViewController {
                 
                  // standaard in IOS 1 thread - UI thread, deze die wij nu willen zit in de background thread, dit moet nu naar de UI thread
                 DispatchQueue.main.async {
+                    self.refresh.endRefreshing()
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.tableView.reloadData()
+                    
                 }
                
                

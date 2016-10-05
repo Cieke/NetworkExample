@@ -49,6 +49,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Users" id="Uex-qX-3iP"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="cVC-c3-yqe">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
+                    <connections>
+                        <outlet property="refresh" destination="cVC-c3-yqe" id="bkB-pO-PwQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TdI-T1-rgi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
